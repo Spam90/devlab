@@ -108,6 +108,19 @@ Lista de verificación manual:
 - [ ] Un enlace público abre el contenido y se puede revocar.
 - [ ] `/api/health` responde `ok`.
 
+### Verificación automatizada contra el despliegue
+
+Con la aplicación en marcha y las credenciales de Supabase en `.env`:
+
+```bash
+npm run supabase:verify   # aislamiento por RLS, enlaces públicos y revocación
+APP_URL=https://TU-DOMINIO npm run smoke:ui   # flujo completo por la interfaz
+```
+
+`supabase:verify` comprueba el esquema de datos con dos usuarios reales (crea y borra usuarios de
+prueba). `smoke:ui` recorre la interfaz: inicio de sesión, creación de proyecto, sincronización,
+enlace público, apertura sin sesión y revocación. Ambos son idempotentes y no dejan rastro.
+
 ## 5. Resolución de problemas
 
 | Síntoma | Causa probable | Solución |
