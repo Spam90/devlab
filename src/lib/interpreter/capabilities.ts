@@ -102,7 +102,7 @@ export function engineSupports(engine: EngineId, feature: LabFeature): boolean {
   return Boolean(capability[FEATURE_REQUIRES[feature]])
 }
 
-/** Explicación en texto de por que una función no está disponible. */
+/** Explicación en texto de por qué una función no está disponible. */
 export function featureUnavailableReason(engine: EngineId, feature: LabFeature): string {
   const capability = ENGINES[engine]
   const required = FEATURE_REQUIRES[feature]

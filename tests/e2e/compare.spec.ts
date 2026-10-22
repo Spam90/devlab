@@ -11,6 +11,11 @@ test.describe('Comparacion de algoritmos', () => {
       window.localStorage.setItem('devlab.locale', 'es')
     })
     await page.goto('/compare')
+    // Se espera a que React haya hidratado: sin esto, el clic puede caer
+    // antes de que los manejadores esten conectados.
+    await expect(
+      page.getByRole('button', { name: /Ejecutar ambas|Run both/ }),
+    ).toBeVisible()
   })
 
   test('ejecuta ambas implementaciones y muestra los resultados', async ({ page }) => {

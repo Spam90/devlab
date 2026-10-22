@@ -72,6 +72,14 @@ npm run build && npm run test:e2e
 - Versiones numeradas de forma creciente.
 - Tolerancia a datos corruptos.
 
+### Calidad del código — `src/lib/quality.test.ts`
+
+- **Ningún identificador con tildes** en el código de TypeScript ni en las migraciones SQL
+  (comprueba el código tras eliminar comentarios y literales). Esta guarda existe porque un
+  cambio automático de texto convirtió `sys.version` en `sys.versión` y rompió el runtime de
+  Pyodide sin que las pruebas de interfaz lo detectaran.
+- Los mensajes de error que imitan a CPython se mantienen en inglés, igual que en Python real.
+
 ## 3. Pruebas de extremo a extremo (Playwright)
 
 Ficheros en `tests/e2e/`:
@@ -90,7 +98,8 @@ Proyectos de Playwright:
 - `mobile-chrome` (Pixel 7, 390×844) para `*.mobile.spec.ts`.
 
 Las pruebas fijan el idioma a español mediante `localStorage` para que las aserciones no dependan del
-idioma del navegador.
+idioma del navegador, y esperan a la hidratación de React antes de interactuar (un clic anterior a
+la hidratación se pierde y produce falsos negativos).
 
 ## 4. Pruebas de Supabase
 

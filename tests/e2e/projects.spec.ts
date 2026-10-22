@@ -12,6 +12,11 @@ test.describe('Proyectos en modo invitado', () => {
       window.localStorage.removeItem('devlab.projects.v1')
     })
     await page.goto('/projects')
+    // Se espera a que React haya hidratado: sin esto, el clic puede caer
+    // antes de que los manejadores esten conectados.
+    await expect(
+      page.getByRole('button', { name: /Nuevo proyecto|New project/ }).first(),
+    ).toBeVisible()
   })
 
   test('crea un proyecto y lo abre en el laboratorio', async ({ page }) => {

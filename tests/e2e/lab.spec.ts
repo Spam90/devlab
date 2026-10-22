@@ -16,6 +16,9 @@ test.describe('Laboratorio en modo invitado', () => {
       }
     })
     await page.goto('/')
+    // Se espera a que React haya hidratado: sin esto, el clic puede
+    // caer antes de que los manejadores esten conectados.
+    await expect(page.getByTestId('step-counter')).toBeVisible()
   })
 
   test('ejecuta el programa de bienvenida y muestra la salida', async ({ page }) => {

@@ -94,7 +94,7 @@ buscar(datos, 18)`,
       right: { es: 'O(log n) tiempo, O(1) memoria', en: 'O(log n) time, O(1) space' },
     },
     difference: {
-      es: 'La busqueda lineal compara uno a uno; la binaria descarta la mitad de los candidatos en cada paso. Con 10 elementos la diferencia es pequeña, pero con 1.000.000 es enorme.',
+      es: 'La búsqueda lineal compara uno a uno; la binaria descarta la mitad de los candidatos en cada paso. Con 10 elementos la diferencia es pequeña, pero con 1.000.000 es enorme.',
       en: 'Linear search compares one by one; binary search discards half of the candidates at each step. With 10 items the difference is small, but with 1,000,000 it is huge.',
     },
     expectedOutput: 'posicion 8 comparaciones 9',
@@ -149,7 +149,7 @@ print(ordenar(datos))`,
     },
     whenToUse: {
       left: {
-        es: 'Enseñanza y listas muy pequenas: es facil de seguir y de verificar.',
+        es: 'Enseñanza y listas muy pequeñas: es fácil de seguir y de verificar.',
         en: 'Teaching and very small lists: easy to follow and to verify.',
       },
       right: {
@@ -205,7 +205,7 @@ print(fibonacci(15))`,
     },
     whenToUse: {
       left: {
-        es: 'Enseñanza: se ve de inmediato que la recursion repite subproblemas.',
+        es: 'Enseñanza: se ve de inmediato que la recursión repite subproblemas.',
         en: 'Teaching: it shows at once that recursion repeats subproblems.',
       },
       right: {
@@ -258,7 +258,7 @@ print(factorial(10))`,
     },
     whenToUse: {
       left: {
-        es: 'Enseñanza y problemas que se decomponen de forma natural.',
+        es: 'Enseñanza y problemas que se descomponen de forma natural.',
         en: 'Teaching and problems that decompose naturally.',
       },
       right: {

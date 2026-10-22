@@ -430,7 +430,7 @@ export class Interpreter {
     if (indexValue.type !== 'number') {
       throw new PyRuntimeError(
         'TypeError',
-        'list índices must be integers',
+        'list indices must be integers',
         target.pos,
       )
     }
@@ -456,7 +456,7 @@ export class Interpreter {
     const indexValue = this.evaluate(target.index, scope)
     if (container.type === 'list') {
       if (indexValue.type !== 'number') {
-        throw new PyRuntimeError('TypeError', 'list índices must be integers', target.pos)
+        throw new PyRuntimeError('TypeError', 'list indices must be integers', target.pos)
       }
       const index = Math.trunc(indexValue.value)
       const normalized = index < 0 ? container.items.length + index : index
@@ -468,7 +468,7 @@ export class Interpreter {
     }
     if (container.type === 'string') {
       if (indexValue.type !== 'number') {
-        throw new PyRuntimeError('TypeError', 'string índices must be integers', target.pos)
+        throw new PyRuntimeError('TypeError', 'string indices must be integers', target.pos)
       }
       const index = Math.trunc(indexValue.value)
       const normalized = index < 0 ? container.value.length + index : index
@@ -667,7 +667,7 @@ export class Interpreter {
     if (indexValue.type !== 'number') {
       throw new PyRuntimeError(
         'TypeError',
-        `'${typeName(container)}' índices must be integers`,
+        `'${typeName(container)}' indices must be integers`,
         position,
       )
     }

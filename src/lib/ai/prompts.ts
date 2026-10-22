@@ -26,7 +26,7 @@ export interface ExplanationInput {
 
 const TASK_INSTRUCTIONS: Record<AiTask, { es: string; en: string }> = {
   'explain-code': {
-    es: 'Explica que hace este código Python, paso a paso y con claridad para alguien que esta aprendiendo.',
+    es: 'Explica que hace este código Python, paso a paso y con claridad para alguien que está aprendiendo.',
     en: 'Explain what this Python code does, step by step, clearly for someone learning.',
   },
   'explain-error': {
@@ -58,7 +58,7 @@ export function buildExplanationMessages(input: ExplanationInput): AiMessage[] {
     'En "Hechos observados" solo puedes afirmar lo que aparece en el código, en la salida real o en los datos de ejecucion proporcionados.',
     'No inventes resultados de ejecucion, valores, medidas ni conclusiones que no esten justificados.',
     'Si careces de informacion, dilo explicitamente en lugar de suponerla.',
-    'Se conciso: como máximo 250 palabras.',
+    'Sé conciso: como máximo 250 palabras.',
   ].join(' ')
 
   const userParts: string[] = []

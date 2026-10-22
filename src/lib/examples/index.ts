@@ -45,11 +45,11 @@ edad = 37
 print("edad ahora:", edad)
 
 total = edad + 1
-print("el próximo cumpleanos sera", total)`,
+print("el próximo cumpleaños será", total)`,
     expectedOutput: `Ada 36 1.72
 <class 'int'> <class 'float'> <class 'bool'> <class 'NoneType'>
 edad ahora: 37
-el próximo cumpleanos sera 38`,
+el próximo cumpleaños será 38`,
     engines: ['devlab', 'pyodide'],
   },
   {
@@ -136,11 +136,11 @@ total final: 15`,
     category: 'functions',
     title: { es: 'Funciones', en: 'Functions' },
     summary: {
-      es: 'Define una funcion, recibe parámetros y devuelve un resultado.',
+      es: 'Define una función, recibe parámetros y devuelve un resultado.',
       en: 'Define a function, take parameters and return a result.',
     },
     explanation: {
-      es: '`def` crea un objeto funcion en el ambito donde se define. Los parámetros son variables locales; el `return` devuelve un valor y termina la ejecucion de la funcion.',
+      es: '`def` crea un objeto función en el ámbito donde se define. Los parámetros son variables locales; el `return` devuelve un valor y termina la ejecucion de la funcion.',
       en: '`def` creates a function object in the scope where it is defined. Parameters are local variables; `return` yields a value and ends the function execution.',
     },
     code: `def area_rectangulo(base, altura):
@@ -169,7 +169,7 @@ grande`,
       en: 'A function that calls itself until reaching a base case.',
     },
     explanation: {
-      es: 'Cada llamada crea un ambito local con sus propios parámetros. La recursion termina cuando se cumple el caso base. DevLab limita la profundidad para evitar desbordar la pila.',
+      es: 'Cada llamada crea un ámbito local con sus propios parámetros. La recursión termina cuando se cumple el caso base. DevLab limita la profundidad para evitar desbordar la pila.',
       en: 'Each call creates a local scope with its own parameters. The recursion ends when the base case is met. DevLab limits the depth to avoid overflowing the stack.',
     },
     code: `def fibonacci(n):
@@ -321,7 +321,7 @@ print(burbuja([5, 1, 4, 2, 8]))`,
       en: 'The same Fibonacci sequence computed without recursion.',
     },
     explanation: {
-      es: 'La version iterativa guarda el último valor y evita la pila de llamadas: usa O(1) memoria frente a O(n) de la version recursiva.',
+      es: 'La versión iterativa guarda el último valor y evita la pila de llamadas: usa O(1) memoria frente a O(n) de la version recursiva.',
       en: 'The iterative version keeps the last value and avoids the call stack: it uses O(1) memory against O(n) for the recursive one.',
     },
     code: `def fibonacci_iterativo(n):

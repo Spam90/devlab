@@ -10,6 +10,9 @@ test.describe('Laboratorio en movil', () => {
       window.localStorage.setItem('devlab.tour.completed', '1')
     })
     await page.goto('/')
+    // Se espera a que React haya hidratado: sin esto, el clic puede caer
+    // antes de que los manejadores esten conectados.
+    await expect(page.getByTestId('step-counter')).toBeVisible()
 
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth - document.documentElement.clientWidth,

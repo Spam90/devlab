@@ -50,7 +50,7 @@ create table if not exists public.user_settings (
   updated_at        timestamptz not null default now()
 );
 
-comment on table public.user_settings is 'Preferencias de la interfaz y limites de ejecución.';
+comment on table public.user_settings is 'Preferencias de la interfaz y límites de ejecución.';
 
 -- -----------------------------------------------------------------------------
 -- projects: programas guardados por el usuario
@@ -78,17 +78,17 @@ create table if not exists public.project_versions (
   id             uuid primary key default gen_random_uuid(),
   project_id     uuid        not null references public.projects (id) on delete cascade,
   user_id        uuid        not null references auth.users (id) on delete cascade,
-  versión_number integer     not null check (versión_number > 0),
+  version_number integer     not null check (version_number > 0),
   code           text        not null check (char_length(code) <= 100000),
   label          text        check (char_length(label) <= 120),
   created_at     timestamptz not null default now(),
-  unique (project_id, versión_number)
+  unique (project_id, version_number)
 );
 
 comment on table public.project_versions is 'Versiones guardadas del código de un proyecto.';
 
 create index if not exists project_versions_project_idx
-  on public.project_versions (project_id, versión_number desc);
+  on public.project_versions (project_id, version_number desc);
 
 -- -----------------------------------------------------------------------------
 -- public_shares: enlaces públicos revocables
@@ -100,7 +100,7 @@ create table if not exists public.public_shares (
   id             uuid primary key default gen_random_uuid(),
   project_id     uuid        not null references public.projects (id) on delete cascade,
   user_id        uuid        not null references auth.users (id) on delete cascade,
-  versión_id     uuid        references public.project_versions (id) on delete set null,
+  version_id     uuid        references public.project_versions (id) on delete set null,
   token_hash     text        not null unique,
   code           text        not null check (char_length(code) <= 100000),
   include_code   boolean     not null default true,

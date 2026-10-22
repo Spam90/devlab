@@ -99,6 +99,8 @@ Cada elemento de esta lista produce un error claro (no un comportamiento silenci
 | `range` | Lista materializada | Objeto perezoso |
 | Asignación dentro de una función | Siempre local (sin `global`) | Local, salvo `global` |
 | Identidad de objetos (`is`) | No implementado | Implementado |
+| Mensajes de error de ejecución | Los de CPython, en inglés (`name 'x' is not defined`) | Igual |
+| Errores de sintaxis del subconjunto | En español, con la posición (`Se esperaba ':' al final de la cabecera.`) | En inglés (`invalid syntax`) |
 
 ## 3. Pyodide
 

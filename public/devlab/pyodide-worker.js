@@ -63,8 +63,8 @@ self.onmessage = async (event) => {
       post({
         type: 'ready',
         id,
-        versión: runtime.versión ?? 'desconocida',
-        pythonVersion: runtime.runPython('import sys; sys.versión.split()[0]'),
+        version: runtime.version ?? 'desconocida',
+        pythonVersion: runtime.runPython('import sys; sys.version.split()[0]'),
       })
     } catch (error) {
       post({
