@@ -2,11 +2,12 @@
 
 ## 1. Crear el proyecto
 
-> **Estado actual:** el proyecto `ysyvopwmfhgzkucicjrg` ya está creado y sus credenciales están en
-> `.env` (ignorado por git). Verificado: la clave `sb_publishable_` es válida y el correo está
-> habilitado **con confirmación por correo activada** (`mailer_autoconfirm: false`). El proveedor
-> **de GitHub todavía no está configurado** en el panel (`"github": false`): el botón existe en la
-> interfaz, pero el inicio de sesión real fallará hasta que añadas el Client ID y el Client Secret.
+> **Estado actual:** el proyecto `ysyvopwmfhgzkucicjrg` ya está creado, con el esquema aplicado y
+> verificado. La clave `sb_publishable_` es válida y el correo está habilitado **con confirmación por
+> correo activada** (`mailer_autoconfirm: false`): al registrarse, el usuario recibe un correo de
+> confirmación, y la interfaz ya lo indica con el aviso «revisa tu correo». El proveedor **de GitHub
+> sigue sin configurar** en el panel (`"github": false`): el botón existe en la interfaz, pero el
+> inicio de sesión real fallará hasta que añadas el Client ID y el Client Secret.
 
 Para un proyecto nuevo:
 
@@ -26,16 +27,26 @@ Para un proyecto nuevo:
 
 ## 2. Aplicar las migraciones
 
-> **Estado actual del proyecto `ysyvopwmfhgzkucicjrg`:** las credenciales están guardadas en `.env` y
-> verificadas (la conexión funciona), pero **el esquema aún no está desplegado**: las cinco tablas y
-> la función pública dan `PGRST205` / `PGRST202`. Hasta aplicar las migraciones, la autenticación
-> funciona pero los proyectos, las versiones y los enlaces públicos no.
+> **Estado actual del proyecto `ysyvopwmfhgzkucicjrg`:** esquema **desplegado y verificado**. Las tres
+> migraciones están aplicadas y `npm run supabase:verify` da **17/17 comprobaciones correctas**
+> contra la base de datos real (dos usuarios con sesiones reales, aislamiento por RLS, enlace
+> público y revocación).
+
+Las migraciones aplicadas son:
+
+| Migración | Contenido |
+| --- | --- |
+| `20260101000000_init_schema.sql` | 5 tablas, índices, `CHECK`, triggers de `updated_at` y de creación de perfil/ajustes. |
+| `20260101000100_rls_policies.sql` | RLS en las 5 tablas, 19 políticas y las funciones `resolve_public_share` / `touch_public_share`. |
+| `20260101000200_user_id_defaults.sql` | `default auth.uid()` en las columnas `user_id`, para que el motor asigne el propietario y el cliente no pueda equivocarse. |
+
+### Reaplicar migraciones
 
 ### Opción A — SQL Editor (sin tokens)
 
 1. Genera el fichero combinado si hace falta: `npm run supabase:bundle`.
 2. Abre el panel de Supabase → **SQL Editor → New query**.
-3. Pega el contenido de `supabase/apply-migrations.sql` (377 líneas) y pulsa **Run**.
+3. Pega el contenido de `supabase/apply-migrations.sql` y pulsa **Run**.
 4. Comprueba con `npm run supabase:check`: las cinco tablas y la RPC deben decir `ok`.
 
 ### Opción B — Management API (un comando)
@@ -66,13 +77,23 @@ npm run supabase:reset     # aplica migraciones y reinicia la base de datos
 
 La configuración local está en `supabase/config.toml`.
 
-### Comprobación
+### Comprobaciones
 
 ```bash
-npm run supabase:check
+npm run supabase:check     # estado del esquema (no imprime secretos)
+npm run supabase:verify    # verificación de extremo a extremo con usuarios reales
 ```
 
-Informa del estado de la conexión, de cada tabla y de la función pública, **sin imprimir secretos**.
+`supabase:check` informa del estado de la conexión, de cada tabla y de la función pública.
+`supabase:verify` crea dos usuarios temporales y comprueba, con sesiones reales:
+
+- Cada usuario ve sus propios proyectos y **no** los del otro (aislamiento horizontal).
+- Un segundo usuario no puede leer, modificar ni borrar datos ajenos ni por identificador.
+- Un enlace público se resuelve sin sesión y expone solo el contenido compartido.
+- Al revocar el enlace, deja de resolverse.
+- Los triggers crean el perfil y los ajustes de cada usuario.
+
+Los usuarios de prueba se eliminan al terminar.
 
 ## 3. Esquema
 

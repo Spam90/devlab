@@ -89,6 +89,7 @@ Para activar la persistencia:
 | `npm run supabase:check` | Comprueba la conexión y si el esquema está desplegado (sin imprimir secretos). |
 | `npm run supabase:apply` | Aplica las migraciones en remoto (necesita `SUPABASE_ACCESS_TOKEN`). |
 | `npm run supabase:bundle` | Regenera `supabase/apply-migrations.sql` para pegar en el SQL Editor. |
+| `npm run supabase:verify` | Verificación de extremo a extremo con dos usuarios reales. |
 
 ## Arquitectura
 
@@ -195,9 +196,10 @@ npm run test:e2e
 | Intérprete educativo, historial reversible, límites | Implementado y probado |
 | Pyodide en el navegador (carga diferida, worker, cancelación) | Implementado y probado en navegador real |
 | Comparación de algoritmos con métricas medidas | Implementado y probado |
-| Supabase: esquema, RLS, función pública, migraciones | Implementado; requiere credenciales para verificarlo |
-| Auth por correo y GitHub | Implementado; el flujo real requiere credenciales |
-| Proyectos, versiones, importación de invitado, enlaces revocables | Implementado; la parte remota requiere credenciales |
+| Supabase: esquema, RLS, función pública, migraciones | **Aplicado y verificado** (17/17 comprobaciones con usuarios reales) |
+| Auth por correo | Implementado; el correo exige confirmación (activada en el panel) |
+| GitHub OAuth | Implementado; falta activar el proveedor en el panel de Supabase |
+| Proyectos, versiones, importación de invitado, enlaces revocables | Implementado y verificado contra la base de datos real |
 | IA opcional con protección SSRF | Implementado y probado (la llamada al proveedor requiere una clave) |
 | Diseño premium, responsive, accesibilidad | Implementado; validado con Playwright en escritorio y móvil |
 | Documentación y preparación de despliegue | Completa |
